@@ -1,5 +1,6 @@
 ### Hexlet tests and linter status:
-[![Actions Status](https://github.com/BuilovAlmaty/python-project-49/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/BuilovAlmaty/python-project-49/actions)
+
+[![Actions Status](https://github.com/BuilovAlmaty/python-project-49/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/BuilovAlmaty/python-project-49/actions)Add commentMore actions
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=BuilovAlmaty_python-project-49&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=BuilovAlmaty_python-project-49)
 
