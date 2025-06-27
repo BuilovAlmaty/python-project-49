@@ -11,3 +11,9 @@ build: # сборка пакета
 
 package-install: # установка пакета
 	uv tool install dist/*.whl
+
+lint:
+	uv run ruff check brain_games
+	uv run ruff check brain_even
+lint-fix:
+	uv run ruff check . --fix
