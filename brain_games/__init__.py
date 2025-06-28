@@ -1,4 +1,4 @@
-from brain_games.brain_games_even import start
+from brain_games.engine import start
 from brain_games.cli import welcome_user
 
 __all__ = (
