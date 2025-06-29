@@ -15,5 +15,7 @@ package-install: # установка пакета
 lint:
 	uv run ruff check brain_games
 	uv run ruff check brain_even
+	uv run ruff check brain_calc
+	uv run ruff check brain_gcd
 lint-fix:
 	uv run ruff check . --fix

@@ -1,5 +1,7 @@
 from random import randint
+
 import prompt
+
 
 def start(games_name):
     print("Welcome to the Brain Games!")
@@ -36,8 +38,10 @@ def start(games_name):
 
     print(f'Congratulations, {name}!')
 
+
 def is_right_answer(answer, number, games_name):
     return answer == get_right_answer(number, games_name)
+
 
 def get_right_answer(number, games_name): 
     match games_name:
@@ -48,6 +52,7 @@ def get_right_answer(number, games_name):
         case 'gcd':
             return euclids_algorithm(number)
         
+
 def get_question(games_name):
     match games_name:
         case 'even':
@@ -61,8 +66,10 @@ def get_question(games_name):
         case 'gcd':
             return (randint(1, 100), randint(1, 100))
 
+
 def is_even(number):
     return number % 2 == 0
+
 
 def euclids_algorithm(number):
     a, b = number
@@ -89,6 +96,7 @@ def euclids_algorithm(number):
 
     return max
 
+
 def answer_processing(games_name):
     match games_name:
         case 'even':
@@ -99,6 +107,7 @@ def answer_processing(games_name):
         case 'gcd':
             return prompt.integer('Your answer: ')
 
+
 def guard_ex(games_name, answer):
     match games_name:
         case 'even':
@@ -108,6 +117,7 @@ def guard_ex(games_name, answer):
         case 'gcd':
             return isinstance(answer, int)
         
+
 def greeting(games_name):  
     match games_name:
         case 'even':
