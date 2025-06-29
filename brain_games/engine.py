@@ -45,6 +45,8 @@ def get_right_answer(number, games_name):
             return 'yes' if is_even(number) else 'no'
         case 'calc':
             return eval(number)
+        case 'gcd':
+            return euclids_algorithm(number)
         
 def get_question(games_name):
     match games_name:
@@ -55,10 +57,37 @@ def get_question(games_name):
             a = str(randint(1, 100))
             b = str(randint(1, 100))
             sign = list_of_signs[randint(0, 2)]
-            return a + sign + b    
+            return a + sign + b
+        case 'gcd':
+            return (randint(1, 100), randint(1, 100))
 
 def is_even(number):
     return number % 2 == 0
+
+def euclids_algorithm(number):
+    a, b = number
+    
+    if a == 0 or b == 0:
+        return 1
+    if a == b:
+        return a
+    if a > b:
+        max = a
+        min = b
+    else:
+        max = b
+        min = a
+
+    balance = max
+
+    while min != 0:
+        while balance >= min:
+            balance -= min
+        max = min
+        min = balance
+        balance = max
+
+    return max
 
 def answer_processing(games_name):
     match games_name:
@@ -66,6 +95,8 @@ def answer_processing(games_name):
             answer = prompt.string('Your answer: ')
             return answer.lower().strip()
         case 'calc':
+            return prompt.integer('Your answer: ') 
+        case 'gcd':
             return prompt.integer('Your answer: ')
 
 def guard_ex(games_name, answer):
@@ -74,6 +105,8 @@ def guard_ex(games_name, answer):
             return answer in {'yes', 'no'}
         case 'calc':
             return isinstance(answer, int)
+        case 'gcd':
+            return isinstance(answer, int)
         
 def greeting(games_name):  
     match games_name:
@@ -81,3 +114,5 @@ def greeting(games_name):
             print('Answer "yes" if the number is even, otherwise answer "no".')
         case 'calc':
             print('What is the result of the expression?')
+        case 'gcd':
+            print('Find the greatest common divisor of given numbers.')
