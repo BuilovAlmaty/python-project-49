@@ -1,4 +1,5 @@
 from random import randint
+
 import prompt
 
 
@@ -85,6 +86,7 @@ def get_question(games_name):
 def is_even(number):
     return number % 2 == 0
 
+
 def euclids_algorithm(number):
     a, b = number
     
@@ -110,6 +112,7 @@ def euclids_algorithm(number):
 
     return max
 
+
 def is_simple(number):
     if number < 2:
         return False
@@ -121,11 +124,13 @@ def is_simple(number):
             return False
     return True
 
+
 def get_progression():
     first = randint(1, 100)
     diff = randint(1, 9)
 
     return [first + diff * i for i in range(10)] 
+
 
 def answer_processing(games_name):
     match games_name:
@@ -141,6 +146,7 @@ def answer_processing(games_name):
         case 'simple':
             answer = prompt.string('Your answer: ')
             return answer.lower().strip()
+
 
 def guard_ex(games_name, answer):
     match games_name:
