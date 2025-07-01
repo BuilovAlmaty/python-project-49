@@ -27,7 +27,7 @@ OS - Linux
 
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=BuilovAlmaty_python-project-49&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=BuilovAlmaty_python-project-49)
 
-###Information -> Badges
+### Information -> Badges
 
 [![asciicast](https://asciinema.org/a/QrLtuorrax53enCpOSlUYXXFZ.svg)](https://asciinema.org/a/QrLtuorrax53enCpOSlUYXXFZ)
 
