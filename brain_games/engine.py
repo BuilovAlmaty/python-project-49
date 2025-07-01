@@ -11,10 +11,11 @@ def start(games_name):
     
     step = True
     i = 0
+    steps_count = 3
 
     greeting(games_name)    
 
-    while step and i < 3:
+    while step and i < steps_count:
         question = get_question(games_name)
         print(f'Question: {question["question"]}')
 
@@ -40,24 +41,25 @@ def start(games_name):
      
 
 def get_question(games_name):
+    max_random_border = 100
     match games_name:
         case 'even':
-            number = randint(1, 100)
+            number = randint(1, max_random_border)
             return {
                 'question': str(number),
                 'right_answer': 'yes' if is_even(number) else 'no' 
             }
         case 'calc':
             list_of_signs = [" + ", " - ", " * "]
-            a = str(randint(1, 100))
-            b = str(randint(1, 100))
-            sign = list_of_signs[randint(0, 2)]
+            a = str(randint(1, max_random_border))
+            b = str(randint(1, max_random_border))
+            sign = list_of_signs[randint(0, len(list_of_signs) - 1)]
             return {
                 'question': a + sign + b,
                 'right_answer': eval(a + sign + b)
             }           
         case 'gcd':
-            set = (randint(1, 100), randint(1, 100))
+            set = (randint(1, max_random_border), randint(1, max_random_border))
             return {
                 'question': str(set),
                 'right_answer': euclids_algorithm(set)
@@ -76,7 +78,7 @@ def get_question(games_name):
                 'right_answer': progression_list[x_pos]
             }
         case 'simple':
-            number = randint(1, 100)
+            number = randint(1, max_random_border)
             return {
                 'question': str(number),
                 'right_answer': 'yes' if is_simple(number) else 'no' 
@@ -128,8 +130,9 @@ def is_simple(number):
 def get_progression():
     first = randint(1, 100)
     diff = randint(1, 9)
+    progression_len = 10
 
-    return [first + diff * i for i in range(10)] 
+    return [first + diff * i for i in range(progression_len)] 
 
 
 def answer_processing(games_name):
