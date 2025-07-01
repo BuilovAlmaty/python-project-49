@@ -2,6 +2,8 @@
 #Makefile
 install: # синхронизация окружения .venv с файлами pyproject.toml и uv.lock
 	uv sync
+reinstal:
+	uv tool install -e .
 
 brain-games: # запуск проекта
 	uv run brain-games
@@ -17,5 +19,8 @@ lint:
 	uv run ruff check brain_even
 	uv run ruff check brain_calc
 	uv run ruff check brain_gcd
+	uv run ruff check brain_progression
+	uv run ruff check brain_silpe
 lint-fix:
 	uv run ruff check . --fix
+

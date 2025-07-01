@@ -74,6 +74,12 @@ def get_question(games_name):
                 'question': represent,
                 'right_answer': progression_list[x_pos]
             }
+        case 'simple':
+            number = randint(1, 100)
+            return {
+                'question': str(number),
+                'right_answer': 'yes' if is_simple(number) else 'no' 
+            }
 
 
 def is_even(number):
@@ -104,6 +110,17 @@ def euclids_algorithm(number):
 
     return max
 
+def is_simple(number):
+    if number < 2:
+        return False
+    i = 2
+    while i <= number // 2:
+        if number % i != 0:
+            i += 1
+        else:
+            return False
+    return True
+
 def get_progression():
     first = randint(1, 100)
     diff = randint(1, 9)
@@ -121,6 +138,9 @@ def answer_processing(games_name):
             return prompt.integer('Your answer: ')
         case 'progression':
             return prompt.integer('Your answer: ')
+        case 'simple':
+            answer = prompt.string('Your answer: ')
+            return answer.lower().strip()
 
 def guard_ex(games_name, answer):
     match games_name:
@@ -132,6 +152,8 @@ def guard_ex(games_name, answer):
             return isinstance(answer, int)
         case 'progression':
             return isinstance(answer, int)
+        case 'simple':
+            return answer in {'yes', 'no'}
         
 
 def greeting(games_name):  
@@ -144,3 +166,6 @@ def greeting(games_name):
             print('Find the greatest common divisor of given numbers.')
         case 'progression':
             print('What number is missing in the progression?')
+        case 'simple':
+            print('Answer "yes" if given number is prime. Otherwise answer "no".')
+            
