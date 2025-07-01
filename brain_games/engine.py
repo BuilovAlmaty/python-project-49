@@ -1,5 +1,4 @@
 from random import randint
-
 import prompt
 
 
@@ -15,61 +14,70 @@ def start(games_name):
     greeting(games_name)    
 
     while step and i < 3:
-        number = get_question(games_name)
-        print(f'Question: {number}')
+        question = get_question(games_name)
+        print(f'Question: {question["question"]}')
 
         answer = answer_processing(games_name)
 
         step = guard_ex(games_name, answer)
         
         if step:
-            step = is_right_answer(answer, number, games_name) 
+            step = answer == question["right_answer"] 
 
         if step:
             print('Correct!')
         else:
             print(
 		    f"'{answer}' is wrong answer ;(."
-		    f"Correct answer was '{get_right_answer(number, games_name)}'."
+		    f"Correct answer was '{question["right_answer"]}'."
 		    )
             print(f"Let's try again, {name}!")
             return
         i += 1
 
     print(f'Congratulations, {name}!')
-
-
-def is_right_answer(answer, number, games_name):
-    return answer == get_right_answer(number, games_name)
-
-
-def get_right_answer(number, games_name): 
-    match games_name:
-        case 'even':
-            return 'yes' if is_even(number) else 'no'
-        case 'calc':
-            return eval(number)
-        case 'gcd':
-            return euclids_algorithm(number)
-        
+     
 
 def get_question(games_name):
     match games_name:
         case 'even':
-            return randint(1, 100)
+            number = randint(1, 100)
+            return {
+                'question': str(number),
+                'right_answer': 'yes' if is_even(number) else 'no' 
+            }
         case 'calc':
             list_of_signs = [" + ", " - ", " * "]
             a = str(randint(1, 100))
             b = str(randint(1, 100))
             sign = list_of_signs[randint(0, 2)]
-            return a + sign + b
+            return {
+                'question': a + sign + b,
+                'right_answer': eval(a + sign + b)
+            }           
         case 'gcd':
-            return (randint(1, 100), randint(1, 100))
+            set = (randint(1, 100), randint(1, 100))
+            return {
+                'question': str(set),
+                'right_answer': euclids_algorithm(set)
+            }
+        case 'progression':
+            progression_list = get_progression()
+            x_pos = randint(1, len(progression_list) - 2)
+            represent = ''
+            for i in range(len(progression_list)):
+                if i == x_pos:
+                    represent += '.. '
+                else:
+                    represent += str(progression_list[i]) + ' '
+            return {
+                'question': represent,
+                'right_answer': progression_list[x_pos]
+            }
 
 
 def is_even(number):
     return number % 2 == 0
-
 
 def euclids_algorithm(number):
     a, b = number
@@ -96,6 +104,11 @@ def euclids_algorithm(number):
 
     return max
 
+def get_progression():
+    first = randint(1, 100)
+    diff = randint(1, 9)
+
+    return [first + diff * i for i in range(10)] 
 
 def answer_processing(games_name):
     match games_name:
@@ -106,7 +119,8 @@ def answer_processing(games_name):
             return prompt.integer('Your answer: ') 
         case 'gcd':
             return prompt.integer('Your answer: ')
-
+        case 'progression':
+            return prompt.integer('Your answer: ')
 
 def guard_ex(games_name, answer):
     match games_name:
@@ -115,6 +129,8 @@ def guard_ex(games_name, answer):
         case 'calc':
             return isinstance(answer, int)
         case 'gcd':
+            return isinstance(answer, int)
+        case 'progression':
             return isinstance(answer, int)
         
 
@@ -126,3 +142,5 @@ def greeting(games_name):
             print('What is the result of the expression?')
         case 'gcd':
             print('Find the greatest common divisor of given numbers.')
+        case 'progression':
+            print('What number is missing in the progression?')
