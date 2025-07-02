@@ -61,7 +61,7 @@ def get_question(games_name):
         case "gcd":
             set = (randint(1, max_random_border), randint(1, max_random_border))
             return {
-                "question": str(set),
+                "question": f'{set[0]} {set[1]}',
                 "right_answer": euclids_algorithm(set),
             }
         case "progression":
