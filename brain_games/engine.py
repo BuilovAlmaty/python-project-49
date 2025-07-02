@@ -6,82 +6,82 @@ import prompt
 def start(games_name):
     print("Welcome to the Brain Games!")
 
-    name = prompt.string('May I have your name? ')
-    print(f'Hello, {name.strip()}')
-    
+    name = prompt.string("May I have your name? ")
+    print(f"Hello, {name.strip()}")
+
     step = True
     i = 0
     steps_count = 3
 
-    greeting(games_name)    
+    greeting(games_name)
 
     while step and i < steps_count:
         question = get_question(games_name)
-        print(f'Question: {question["question"]}')
+        print(f"Question: {question['question']}")
 
         answer = answer_processing(games_name)
 
         step = guard_ex(games_name, answer)
-        
-        if step:
-            step = answer == question["right_answer"] 
 
         if step:
-            print('Correct!')
+            step = answer == question["right_answer"]
+
+        if step:
+            print("Correct!")
         else:
             print(
-		    f"'{answer}' is wrong answer ;(."
-		    f"Correct answer was '{question["right_answer"]}'."
-		    )
+                f"'{answer}' is wrong answer ;(."
+                f"Correct answer was '{question['right_answer']}'."
+            )
             print(f"Let's try again, {name}!")
             return
         i += 1
 
-    print(f'Congratulations, {name}!')
-     
+    print(f"Congratulations, {name}!")
+
 
 def get_question(games_name):
     max_random_border = 100
     match games_name:
-        case 'even':
+        case "even":
             number = randint(1, max_random_border)
             return {
-                'question': str(number),
-                'right_answer': 'yes' if is_even(number) else 'no' 
+                "question": str(number),
+                "right_answer": "yes" if is_even(number) else "no",
             }
-        case 'calc':
+        case "calc":
             list_of_signs = [" + ", " - ", " * "]
             a = str(randint(1, max_random_border))
             b = str(randint(1, max_random_border))
             sign = list_of_signs[randint(0, len(list_of_signs) - 1)]
             return {
-                'question': a + sign + b,
-                'right_answer': eval(a + sign + b)
-            }           
-        case 'gcd':
+                "question": a + sign + b,
+                "right_answer": eval(a + sign + b),
+            }
+        case "gcd":
             set = (randint(1, max_random_border), randint(1, max_random_border))
             return {
-                'question': str(set),
-                'right_answer': euclids_algorithm(set)
+                "question": str(set),
+                "right_answer": euclids_algorithm(set),
             }
-        case 'progression':
+        case "progression":
             progression_list = get_progression()
             x_pos = randint(1, len(progression_list) - 2)
-            represent = ''
+            represent = ""
             for i in range(len(progression_list)):
                 if i == x_pos:
-                    represent += '.. '
+                    represent += ".. "
                 else:
-                    represent += str(progression_list[i]) + ' '
+                    represent += str(progression_list[i]) + " "
             return {
-                'question': represent,
-                'right_answer': progression_list[x_pos]
+                "question": represent,
+                "right_answer": progression_list[x_pos],
             }
-        case 'simple':
+        case "simple":
             number = randint(1, max_random_border)
             return {
-                'question': str(number),
-                'right_answer': 'yes' if is_simple(number) else 'no' 
+                "question": str(number),
+                "right_answer": "yes" if is_simple(number) else "no",
             }
 
 
@@ -91,7 +91,7 @@ def is_even(number):
 
 def euclids_algorithm(number):
     a, b = number
-    
+
     if a == 0 or b == 0:
         return 1
     if a == b:
@@ -132,49 +132,50 @@ def get_progression():
     diff = randint(1, 9)
     progression_len = 10
 
-    return [first + diff * i for i in range(progression_len)] 
+    return [first + diff * i for i in range(progression_len)]
 
 
 def answer_processing(games_name):
     match games_name:
-        case 'even':
-            answer = prompt.string('Your answer: ')
+        case "even":
+            answer = prompt.string("Your answer: ")
             return answer.lower().strip()
-        case 'calc':
-            return prompt.integer('Your answer: ') 
-        case 'gcd':
-            return prompt.integer('Your answer: ')
-        case 'progression':
-            return prompt.integer('Your answer: ')
-        case 'simple':
-            answer = prompt.string('Your answer: ')
+        case "calc":
+            return prompt.integer("Your answer: ")
+        case "gcd":
+            return prompt.integer("Your answer: ")
+        case "progression":
+            return prompt.integer("Your answer: ")
+        case "simple":
+            answer = prompt.string("Your answer: ")
             return answer.lower().strip()
 
 
 def guard_ex(games_name, answer):
     match games_name:
-        case 'even':
-            return answer in {'yes', 'no'}
-        case 'calc':
+        case "even":
+            return answer in {"yes", "no"}
+        case "calc":
             return isinstance(answer, int)
-        case 'gcd':
+        case "gcd":
             return isinstance(answer, int)
-        case 'progression':
+        case "progression":
             return isinstance(answer, int)
-        case 'simple':
-            return answer in {'yes', 'no'}
-        
+        case "simple":
+            return answer in {"yes", "no"}
 
-def greeting(games_name):  
+
+def greeting(games_name):
     match games_name:
-        case 'even':
+        case "even":
             print('Answer "yes" if the number is even, otherwise answer "no".')
-        case 'calc':
-            print('What is the result of the expression?')
-        case 'gcd':
-            print('Find the greatest common divisor of given numbers.')
-        case 'progression':
-            print('What number is missing in the progression?')
-        case 'simple':
-            print('Answer "yes" if given number is prime. Otherwise answer "no".')
-            
+        case "calc":
+            print("What is the result of the expression?")
+        case "gcd":
+            print("Find the greatest common divisor of given numbers.")
+        case "progression":
+            print("What number is missing in the progression?")
+        case "simple":
+            print(
+                'Answer "yes" if given number is prime. Otherwise answer "no".'
+            )

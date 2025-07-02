@@ -2,7 +2,7 @@ from brain_games.engine import start
 
 
 def main():
-    start('progression')
+    start("progression")
 
 
 if __name__ == "__main__":
