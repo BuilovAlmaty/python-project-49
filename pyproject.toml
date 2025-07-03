@@ -1,7 +1,10 @@
 [project]
+authors = [
+    {name = "Alexey Builov", email = "builovalmaty@gmail.com"},
+]
 name = "hexlet-code"
 version = "0.8.2"
-description = "Add your description here"
+description = "5 brain games:even, calc, gcd, lost progression's element,  prime number"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
